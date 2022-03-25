@@ -1,0 +1,31 @@
+﻿@page "/"
+@using sharedState
+
+<PageTitle>Index</PageTitle>
+
+<h1>Welcome!</h1>
+@if (!hasSignedUp)
+{
+    <label>Your Name Please
+        <input @bind=newName />
+    </label>
+    <button @onclick=joinGame>Join Game</button>
+}
+@foreach (var user in State.Users)
+{
+    <p>@user</p>
+}
+<h1>@powers</h1>
+
+@code {
+    string newName;
+    bool hasSignedUp = false;
+    Powers powers;
+
+    void joinGame()
+    {
+        powers = Powers.Fly | Powers.Invisibility;
+        State.Users.Add(newName);
+        hasSignedUp = true;
+    }
+}
